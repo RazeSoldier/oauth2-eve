@@ -4,15 +4,18 @@ namespace Killmails\OAuth2\Client\Provider;
 
 use League\OAuth2\Client\Provider\AbstractProvider;
 use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
-use League\OAuth2\Client\Provider\ResourceOwnerInterface;
 use League\OAuth2\Client\Token\AccessToken;
 use League\OAuth2\Client\Tool\BearerAuthorizationTrait;
 use Psr\Http\Message\ResponseInterface;
 
 class EveOnline extends AbstractProvider
 {
-
     use BearerAuthorizationTrait;
+
+    /**
+     * @var string Key used in a token response to identify the resource owner.
+     */
+    const ACCESS_TOKEN_RESOURCE_OWNER_ID = 'CharacterID';
 
     /**
      * Domain
@@ -67,7 +70,7 @@ class EveOnline extends AbstractProvider
     {
         return [];
     }
-    
+
     /**
      * Returns the string that should be used to separate scopes when building
      * the URL for requesting an access token.
