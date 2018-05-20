@@ -1,6 +1,17 @@
 # Changelog
 All Notable changes to `oauth2-eve` will be documented in this file
 
+## 0.2.2 - 2018-05-19
+
+### Added
+- Nothing
+
+### Deprecated
+- Nothing
+
+### Fixed
+- Use space as `scope` separator instead of comma
+
 ## 0.2.0 - 2016-02-04
 
 ### Added
