@@ -18,6 +18,29 @@ class EveOnline extends AbstractProvider
     const ACCESS_TOKEN_RESOURCE_OWNER_ID = 'CharacterID';
 
     /**
+     * @var string URL path for autorization.
+     */
+    const PATH_AUTHORIZE = '/oauth/authorize';
+
+
+    /**
+     * @var string URL path for token.
+     */
+    const PATH_TOKEN = '/oauth/token';
+
+
+    /**
+     * @var string URL path for user details.
+     */
+    const PATH_USER = '/oauth/verify';
+
+
+    /**
+     * @var string Scope separator
+     */
+    const SCOPE_SEPARATOR = ' ';
+
+    /**
      * Domain
      *
      * @var string
@@ -31,7 +54,7 @@ class EveOnline extends AbstractProvider
      */
     public function getBaseAuthorizationUrl()
     {
-        return $this->domain . '/oauth/authorize';
+        return $this->domain . self::PATH_AUTHORIZE;
     }
 
     /**
@@ -43,7 +66,7 @@ class EveOnline extends AbstractProvider
      */
     public function getBaseAccessTokenUrl(array $params)
     {
-        return $this->domain . '/oauth/token';
+        return $this->domain . self::PATH_TOKEN;
     }
 
     /**
@@ -55,7 +78,7 @@ class EveOnline extends AbstractProvider
      */
     public function getResourceOwnerDetailsUrl(AccessToken $token)
     {
-        return $this->domain . '/oauth/verify';
+        return $this->domain . self::PATH_USER;
     }
 
     /**
@@ -79,7 +102,7 @@ class EveOnline extends AbstractProvider
      */
     protected function getScopeSeparator()
     {
-        return ' ';
+        return self::SCOPE_SEPARATOR;
     }
 
     /**
