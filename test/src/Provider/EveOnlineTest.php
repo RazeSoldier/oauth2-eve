@@ -2,6 +2,8 @@
 
 namespace Killmails\OAuth2\Client\Test\Provider;
 
+use Killmails\OAuth2\Client\Provider\EveOnline;
+use League\OAuth2\Client\Token\AccessToken;
 use League\OAuth2\Client\Tool\QueryBuilderTrait;
 use Mockery as m;
 
@@ -13,7 +15,7 @@ class EveOnlineTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->provider = new \Killmails\OAuth2\Client\Provider\EveOnline([
+        $this->provider = new EveOnline([
             'clientId' => 'mock_client_id',
             'clientSecret' => 'mock_secret',
             'redirectUri' => 'none',
@@ -43,12 +45,12 @@ class EveOnlineTest extends \PHPUnit_Framework_TestCase
 
     public function testScopes()
     {
-        $scopeSeparator = ' ';
         $options = ['scope' => [uniqid(), uniqid()]];
-        $query = ['scope' => implode($scopeSeparator, $options['scope'])];
+        $query = ['scope' => implode(EveOnline::SCOPE_SEPARATOR, $options['scope'])];
+
         $url = $this->provider->getAuthorizationUrl($options);
-        $encodedScope = $this->buildQueryString($query);
-        $this->assertContains($encodedScope, $url);
+
+        $this->assertContains($this->buildQueryString($query), $url);
     }
 
     public function testGetAuthorizationUrl()
@@ -56,7 +58,7 @@ class EveOnlineTest extends \PHPUnit_Framework_TestCase
         $url = $this->provider->getAuthorizationUrl();
         $uri = parse_url($url);
 
-        $this->assertEquals('/oauth/authorize', $uri['path']);
+        $this->assertEquals(EveOnline::PATH_AUTHORIZE, $uri['path']);
     }
 
     public function testGetBaseAccessTokenUrl()
@@ -66,7 +68,17 @@ class EveOnlineTest extends \PHPUnit_Framework_TestCase
         $url = $this->provider->getBaseAccessTokenUrl($params);
         $uri = parse_url($url);
 
-        $this->assertEquals('/oauth/token', $uri['path']);
+        $this->assertEquals(EveOnline::PATH_TOKEN, $uri['path']);
+    }
+
+    public function testGetResourceOwnerDetailsUrl()
+    {
+        $token = new AccessToken(['access_token' => 'mock_access_token']);
+
+        $url = $this->provider->getResourceOwnerDetailsUrl($token);
+        $uri = parse_url($url);
+
+        $this->assertEquals(EveOnline::PATH_USER, $uri['path']);
     }
 
     public function testGetAccessToken()
@@ -96,9 +108,11 @@ class EveOnlineTest extends \PHPUnit_Framework_TestCase
 
     public function testUserData()
     {
-        $characterId = rand(1000, 9999);
-        $characterName = uniqid();
-        $characterOwnerHash = uniqid();
+        $userData = [
+            'CharacterID' => rand(1000, 9999),
+            'CharacterName' => uniqid('name'),
+            'CharacterOwnerHash' => uniqid('hash'),
+        ];
 
         $postResponse = m::mock('Psr\Http\Message\ResponseInterface');
         $postResponse->shouldReceive('getBody')->andReturn(http_build_query([
@@ -111,11 +125,7 @@ class EveOnlineTest extends \PHPUnit_Framework_TestCase
         $postResponse->shouldReceive('getStatusCode')->andReturn(200);
 
         $userResponse = m::mock('Psr\Http\Message\ResponseInterface');
-        $userResponse->shouldReceive('getBody')->andReturn(json_encode([
-              'CharacterID' => $characterId,
-              'CharacterName' => $characterName,
-              'CharacterOwnerHash' => $characterOwnerHash,
-        ]));
+        $userResponse->shouldReceive('getBody')->andReturn(json_encode($userData));
         $userResponse->shouldReceive('getHeader')->andReturn(['content-type' => 'json']);
         $userResponse->shouldReceive('getStatusCode')->andReturn(200);
 
@@ -128,22 +138,22 @@ class EveOnlineTest extends \PHPUnit_Framework_TestCase
         $token = $this->provider->getAccessToken('authorization_code', ['code' => 'mock_authorization_code']);
         $user = $this->provider->getResourceOwner($token);
 
-        $this->assertEquals($characterId, $user->getId());
-        $this->assertEquals($characterId, $user->toArray()['CharacterID']);
-        $this->assertEquals($characterId, $user->getCharacterID());
-        $this->assertEquals($characterName, $user->getName());
-        $this->assertEquals($characterName, $user->toArray()['CharacterName']);
-        $this->assertEquals($characterName, $user->getCharacterName());
-        $this->assertEquals($characterOwnerHash, $user->getCharacterOwnerHash());
-        $this->assertEquals($characterOwnerHash, $user->toArray()['CharacterOwnerHash']);
+        $this->assertEquals($userData['CharacterID'], $user->getId());
+        $this->assertEquals($userData['CharacterID'], $user->toArray()['CharacterID']);
+        $this->assertEquals($userData['CharacterID'], $user->getCharacterID());
+        $this->assertEquals($userData['CharacterName'], $user->getName());
+        $this->assertEquals($userData['CharacterName'], $user->toArray()['CharacterName']);
+        $this->assertEquals($userData['CharacterName'], $user->getCharacterName());
+        $this->assertEquals($userData['CharacterOwnerHash'], $user->getCharacterOwnerHash());
+        $this->assertEquals($userData['CharacterOwnerHash'], $user->toArray()['CharacterOwnerHash']);
     }
 
     /**
      * @expectedException League\OAuth2\Client\Provider\Exception\IdentityProviderException
      **/
-    public function testExceptionThrownWhenErrorObjectReceived()
+    public function testExceptionThrownWhenOAuthErrorReceived()
     {
-        $status = rand(400,600);
+        $status = 200;
         $postResponse = m::mock('Psr\Http\Message\ResponseInterface');
         $postResponse->shouldReceive('getBody')->andReturn(json_encode([
             'error' => uniqid(),
