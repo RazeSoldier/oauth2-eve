@@ -149,7 +149,7 @@ class EveOnlineTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException League\OAuth2\Client\Provider\Exception\IdentityProviderException
+     * @expectedException \League\OAuth2\Client\Provider\Exception\IdentityProviderException
      **/
     public function testExceptionThrownWhenOAuthErrorReceived()
     {
