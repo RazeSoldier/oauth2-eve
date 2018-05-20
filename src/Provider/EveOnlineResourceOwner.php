@@ -3,9 +3,11 @@
 namespace Killmails\OAuth2\Client\Provider;
 
 use League\OAuth2\Client\Provider\ResourceOwnerInterface;
+use League\OAuth2\Client\Tool\ArrayAccessorTrait;
 
 class EveOnlineResourceOwner implements ResourceOwnerInterface
 {
+    use ArrayAccessorTrait;
 
     /**
      * Raw response
@@ -19,7 +21,7 @@ class EveOnlineResourceOwner implements ResourceOwnerInterface
      *
      * @param array $response
      */
-    public function __construct(array $response)
+    public function __construct(array $response = [])
     {
         $this->response = $response;
     }
@@ -31,7 +33,7 @@ class EveOnlineResourceOwner implements ResourceOwnerInterface
      */
     public function getId()
     {
-        return $this->response['CharacterID'] ?: null;
+        return $this->getValueByKey($this->response, 'CharacterID');
     }
 
     /**
@@ -51,7 +53,7 @@ class EveOnlineResourceOwner implements ResourceOwnerInterface
      */
     public function getName()
     {
-        return $this->response['CharacterName'] ?: null;
+        return $this->getValueByKey($this->response, 'CharacterName');
     }
 
     /**
@@ -71,7 +73,7 @@ class EveOnlineResourceOwner implements ResourceOwnerInterface
      */
     public function getCharacterOwnerHash()
     {
-        return $this->response['CharacterOwnerHash'];
+        return $this->getValueByKey($this->response, 'CharacterOwnerHash');
     }
 
     /**
