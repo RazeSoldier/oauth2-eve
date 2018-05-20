@@ -4,9 +4,9 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Alex Soban",
-            "email": "me@soban.co",
-            "homepage": "https://github.com/SobanVuex"
+            "name": "Oizys",
+            "email": "oizys@killmails.com",
+            "homepage": "https://killmails.com"
         }
     ],
     "keywords" :[
@@ -20,8 +20,8 @@
         "eveonline"
     ],
     "require": {
-        "php": ">=5.5.0",
-        "league/oauth2-client": "~1.0"
+        "php": "^5.6|^7.0",
+        "league/oauth2-client": "^2.0"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.0",
