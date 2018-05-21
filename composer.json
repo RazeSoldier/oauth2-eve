@@ -21,6 +21,9 @@
             "homepage": "https://killmails.com"
         }
     ],
+    "support": {
+        "issues": "https://github.com/killmails/oauth2-eve/issues"
+    },
     "require": {
         "league/oauth2-client": "^2.0"
     },
