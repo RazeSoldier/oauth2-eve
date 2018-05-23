@@ -16,27 +16,27 @@ class EveOnline extends AbstractProvider
     /**
      * @var string key used in a token response to identify the resource owner
      */
-    public const ACCESS_TOKEN_RESOURCE_OWNER_ID = 'CharacterID';
+    const ACCESS_TOKEN_RESOURCE_OWNER_ID = 'CharacterID';
 
     /**
      * @var string URL path for autorization
      */
-    public const PATH_AUTHORIZE = '/oauth/authorize';
+    const PATH_AUTHORIZE = '/oauth/authorize';
 
     /**
      * @var string URL path for token
      */
-    public const PATH_TOKEN = '/oauth/token';
+    const PATH_TOKEN = '/oauth/token';
 
     /**
      * @var string URL path for user details
      */
-    public const PATH_USER = '/oauth/verify';
+    const PATH_USER = '/oauth/verify';
 
     /**
      * @var string Scope separator
      */
-    public const SCOPE_SEPARATOR = ' ';
+    const SCOPE_SEPARATOR = ' ';
 
     /**
      * Domain.
