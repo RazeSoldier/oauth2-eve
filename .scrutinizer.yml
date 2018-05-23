@@ -1,15 +1,17 @@
 #lanugage: php
 build:
-     nodes:
-         analysis:
-             tests:
-                 override:
-                     - php-scrutinizer-run
+    nodes:
+        analysis:
+            tests:
+                override:
+                    - php-scrutinizer-run
+
 filter:
     excluded_paths: [tests/*]
+
 checks:
     php: true
+
 tools:
-    external_code_coverage:
-        timeout: 600
+    external_code_coverage: true
     php_cs_fixer: true
