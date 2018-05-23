@@ -3,8 +3,8 @@
 namespace Killmails\OAuth2\Client\Provider;
 
 use League\OAuth2\Client\Provider\AbstractProvider;
-use League\OAuth2\Client\Provider\ResourceOwnerInterface;
 use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
+use League\OAuth2\Client\Provider\ResourceOwnerInterface;
 use League\OAuth2\Client\Token\AccessToken;
 use League\OAuth2\Client\Tool\BearerAuthorizationTrait;
 use Psr\Http\Message\ResponseInterface;
@@ -14,35 +14,32 @@ class EveOnline extends AbstractProvider
     use BearerAuthorizationTrait;
 
     /**
-     * @var string Key used in a token response to identify the resource owner.
+     * @var string key used in a token response to identify the resource owner
      */
-    const ACCESS_TOKEN_RESOURCE_OWNER_ID = 'CharacterID';
+    public const ACCESS_TOKEN_RESOURCE_OWNER_ID = 'CharacterID';
 
     /**
-     * @var string URL path for autorization.
+     * @var string URL path for autorization
      */
-    const PATH_AUTHORIZE = '/oauth/authorize';
-
+    public const PATH_AUTHORIZE = '/oauth/authorize';
 
     /**
-     * @var string URL path for token.
+     * @var string URL path for token
      */
-    const PATH_TOKEN = '/oauth/token';
-
+    public const PATH_TOKEN = '/oauth/token';
 
     /**
-     * @var string URL path for user details.
+     * @var string URL path for user details
      */
-    const PATH_USER = '/oauth/verify';
-
+    public const PATH_USER = '/oauth/verify';
 
     /**
      * @var string Scope separator
      */
-    const SCOPE_SEPARATOR = ' ';
+    public const SCOPE_SEPARATOR = ' ';
 
     /**
-     * Domain
+     * Domain.
      *
      * @var string
      */
@@ -61,7 +58,7 @@ class EveOnline extends AbstractProvider
     /**
      * Get access token url to retrieve token.
      *
-     * @param  array $params
+     * @param array $params
      *
      * @return string
      */
@@ -73,7 +70,7 @@ class EveOnline extends AbstractProvider
     /**
      * Get provider url to fetch user details.
      *
-     * @param  AccessToken $token
+     * @param AccessToken $token
      *
      * @return string
      */
@@ -111,10 +108,8 @@ class EveOnline extends AbstractProvider
      *
      * @throws IdentityProviderException
      *
-     * @param  ResponseInterface $response
-     * @param  array|string      $data Parsed response data
-     *
-     * @return void
+     * @param ResponseInterface $response
+     * @param array|string      $data     Parsed response data
      */
     protected function checkResponse(ResponseInterface $response, $data)
     {
@@ -126,8 +121,8 @@ class EveOnline extends AbstractProvider
     /**
      * Generate a user object from a successful user details request.
      *
-     * @param  array       $response
-     * @param  AccessToken $token
+     * @param array       $response
+     * @param AccessToken $token
      *
      * @return ResourceOwnerInterface
      */
