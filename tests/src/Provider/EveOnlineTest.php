@@ -6,8 +6,9 @@ use Killmails\OAuth2\Client\Provider\EveOnline;
 use League\OAuth2\Client\Token\AccessToken;
 use League\OAuth2\Client\Tool\QueryBuilderTrait;
 use Mockery as m;
+use PHPUnit\Framework\TestCase;
 
-class EveOnlineTest extends \PHPUnit_Framework_TestCase
+class EveOnlineTest extends TestCase
 {
     use QueryBuilderTrait;
 
@@ -85,7 +86,7 @@ class EveOnlineTest extends \PHPUnit_Framework_TestCase
     {
         $response = m::mock('Psr\Http\Message\ResponseInterface');
         $response->shouldReceive('getBody')->andReturn(json_encode([
-            'access_token' =>'mock_access_token',
+            'access_token' => 'mock_access_token',
             'token_type' => 'bearer',
             'expires_in' => 1000,
             'refresh_token' => 'mock_refresh_token',
@@ -149,7 +150,7 @@ class EveOnlineTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException League\OAuth2\Client\Provider\Exception\IdentityProviderException
+     * @expectedException \League\OAuth2\Client\Provider\Exception\IdentityProviderException
      **/
     public function testExceptionThrownWhenOAuthErrorReceived()
     {

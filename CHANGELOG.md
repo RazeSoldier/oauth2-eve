@@ -1,6 +1,19 @@
 # Changelog
 All Notable changes to `oauth2-eve` will be documented in this file
 
+## 1.0.1 - 2018-05-23
+
+### Added
+- PHPUnit 5.7|6.0
+- Mockery 7.2
+- PHP CodeSniffer 3.0
+
+### Deprecated
+- Nothing
+
+### Fixed
+- Nothing
+
 ## 1.0.0 - 2018-05-20
 
 ### Added
