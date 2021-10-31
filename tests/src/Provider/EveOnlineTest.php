@@ -1,6 +1,6 @@
 <?php
 
-namespace Killmails\OAuth2\Client\Test\Provider;
+namespace DtsEve\OAuth2\Client\Test\Provider;
 
 use Killmails\OAuth2\Client\Provider\EveOnline;
 use League\OAuth2\Client\Token\AccessToken;

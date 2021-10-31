@@ -1,6 +1,6 @@
 <?php
 
-namespace Killmails\OAuth2\Client\Provider;
+namespace DtsEve\OAuth2\Client\Provider;
 
 use League\OAuth2\Client\Provider\ResourceOwnerInterface;
 use League\OAuth2\Client\Tool\ArrayAccessorTrait;

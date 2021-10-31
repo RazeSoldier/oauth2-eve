@@ -1,6 +1,6 @@
 <?php
 
-namespace Killmails\OAuth2\Client\Provider;
+namespace DtsEve\OAuth2\Client\Provider;
 
 use League\OAuth2\Client\Provider\AbstractProvider;
 use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
@@ -21,17 +21,12 @@ class EveOnline extends AbstractProvider
     /**
      * @var string URL path for autorization
      */
-    const PATH_AUTHORIZE = '/oauth/authorize';
+    const PATH_AUTHORIZE = '/v2/oauth/authorize';
 
     /**
      * @var string URL path for token
      */
-    const PATH_TOKEN = '/oauth/token';
-
-    /**
-     * @var string URL path for user details
-     */
-    const PATH_USER = '/oauth/verify';
+    const PATH_TOKEN = '/v2/oauth/token';
 
     /**
      * @var string Scope separator
@@ -68,6 +63,25 @@ class EveOnline extends AbstractProvider
     }
 
     /**
+     * @param AccessToken $token
+     * @return ResourceOwnerInterface|mixed
+     */
+    public function getResourceOwner(AccessToken $token)
+    {
+        $jwtexplode=json_decode(base64_decode(str_replace('_', '/', str_replace('-','+',explode('.',$token )[1]))));
+        $charactername=$jwtexplode->name;
+        $characterid=explode(":",$jwtexplode->sub)[2];
+
+        $response['CharacterName']=$charactername;
+        $response['CharacterID']=$characterid;
+        $response['CharacterOwnerHash']=$jwtexplode->owner;
+        $response['ExpiresOn']=date('Y-m-d\TH:i:s',$jwtexplode->exp);
+        $response['Scopes']=implode(" ",$jwtexplode->scp);
+
+        return $this->createResourceOwner($response, $token);
+    }
+
+    /**
      * Get provider url to fetch user details.
      *
      * @param AccessToken $token
@@ -76,7 +90,7 @@ class EveOnline extends AbstractProvider
      */
     public function getResourceOwnerDetailsUrl(AccessToken $token)
     {
-        return $this->domain . self::PATH_USER;
+        return null;
     }
 
     /**

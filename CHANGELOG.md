@@ -1,6 +1,9 @@
 # Changelog
 All Notable changes to `oauth2-eve` will be documented in this file
 
+## 1.0.2 - 2021.10.31
+- Change for new ESI V2 authentication
+
 ## 1.0.1 - 2018-05-23
 
 ### Added

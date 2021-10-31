@@ -1,11 +1,13 @@
 # EVE Online Provider for OAuth 2.0 Client
-[![Source Code](http://img.shields.io/badge/source-killmails/oauth2--eve-blue.svg?style=flat-square)](https://github.com/killmails/oauth2-eve)
-[![Latest Version](https://img.shields.io/github/release/killmails/oauth2-eve.svg?style=flat-square)](https://github.com/killmails/oauth2-eve/releases)
+FORK of https://github.com/killmails/oauth2-eve
+
+[![Source Code](http://img.shields.io/badge/source-dts-eve/oauth2--eve-blue.svg?style=flat-square)](https://github.com/dts-eve/oauth2-eve)
+[![Latest Version](https://img.shields.io/github/release/dts-eve/oauth2-eve.svg?style=flat-square)](https://github.com/dts-eve/oauth2-eve/releases)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
-[![Build Status](https://img.shields.io/travis/killmails/oauth2-eve/master.svg?style=flat-square)](https://travis-ci.org/killmails/oauth2-eve)
-[![Coverage Status](https://img.shields.io/scrutinizer/coverage/g/killmails/oauth2-eve.svg?style=flat-square)](https://scrutinizer-ci.com/g/killmails/oauth2-eve/code-structure)
-[![Quality Score](https://img.shields.io/scrutinizer/g/killmails/oauth2-eve.svg?style=flat-square)](https://scrutinizer-ci.com/g/killmails/oauth2-eve)
-[![Total Downloads](https://img.shields.io/packagist/dt/killmails/oauth2-eve.svg?style=flat-square)](https://packagist.org/packages/killmails/oauth2-eve)
+[![Build Status](https://img.shields.io/travis/dts-eve/oauth2-eve/master.svg?style=flat-square)](https://travis-ci.org/dts-eve/oauth2-eve)
+[![Coverage Status](https://img.shields.io/scrutinizer/coverage/g/dts-eve/oauth2-eve.svg?style=flat-square)](https://scrutinizer-ci.com/g/dts-eve/oauth2-eve/code-structure)
+[![Quality Score](https://img.shields.io/scrutinizer/g/dts-eve/oauth2-eve.svg?style=flat-square)](https://scrutinizer-ci.com/g/dts-eve/oauth2-eve)
+[![Total Downloads](https://img.shields.io/packagist/dt/dts-eve/oauth2-eve.svg?style=flat-square)](https://packagist.org/packages/dts-eve/oauth2-eve)
 
 This package provides [EVE Online](https://developers.eveonline.com) OAuth 2.0 support for the PHP League's [OAuth 2.0 Client](https://github.com/thephpleague/oauth2-client).
 
@@ -14,17 +16,17 @@ This package provides [EVE Online](https://developers.eveonline.com) OAuth 2.0 s
 To install, use composer:
 
 ```
-composer require killmails/oauth2-eve
+composer require dts-eve/oauth2-eve
 ```
 
 ## Usage
 
-Usage is the same as The League's OAuth client, using `\Killmails\OAuth2\Client\Provider\EveOnline` as the provider.
+Usage is the same as The League's OAuth client, using `\DtsEve\OAuth2\Client\Provider\EveOnline` as the provider.
 
 ### Authorization Code Flow
 
 ```php
-$provider = new Killmails\OAuth2\Client\Provider\EveOnline([
+$provider = new DtsEve\OAuth2\Client\Provider\EveOnline([
     'clientId'          => '{eve-client-id}',
     'clientSecret'      => '{eve-client-key}',
     'redirectUri'       => 'https://example.com/callback-url',
@@ -90,7 +92,7 @@ if (!isset($_GET['code'])) {
 Once your application is authorized, you can refresh an expired token using a refresh token rather than going through the entire process of obtaining a brand new token. To do so, simply reuse this refresh token from your data store to request a refresh.
 
 ```php
-$provider = new Killmails\OAuth2\Client\Provider\EveOnline([
+$provider = new DtsEve\OAuth2\Client\Provider\EveOnline([
     'clientId'          => '{eve-client-id}',
     'clientSecret'      => '{eve-client-key}',
     'redirectUri'       => 'https://example.com/callback-url',
@@ -131,13 +133,13 @@ $ ./vendor/bin/phpunit
 
 ## Contributing
 
-Please see [CONTRIBUTING](https://github.com/killmails/oauth2-eve/blob/master/CONTRIBUTING.md) for details.
+Please see [CONTRIBUTING](https://github.com/dts-eve/oauth2-eve/blob/master/CONTRIBUTING.md) for details.
 
 ## Credits
 
 - [Oizys](https://github.com/syzio)
-- [All Contributors](https://github.com/killmails/oauth2-eve/contributors)
+- [All Contributors](https://github.com/dts-eve/oauth2-eve/contributors)
 
 ## License
 
-The MIT License (MIT). Please see [License File](https://github.com/killmails/oauth2-eve/blob/master/LICENSE) for more information.
+The MIT License (MIT). Please see [License File](https://github.com/dts-eve/oauth2-eve/blob/master/LICENSE) for more information.
