@@ -76,7 +76,9 @@ class EveOnline extends AbstractProvider
         $response['CharacterID']=$characterid;
         $response['CharacterOwnerHash']=$jwtexplode->owner;
         $response['ExpiresOn']=date('Y-m-d\TH:i:s',$jwtexplode->exp);
-        $response['Scopes']=implode(" ",$jwtexplode->scp);
+        if (isset($jwtexplode->scp)) {
+            $response['Scopes']=implode(" ",$jwtexplode->scp);
+        }
 
         return $this->createResourceOwner($response, $token);
     }
