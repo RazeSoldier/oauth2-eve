@@ -1,5 +1,5 @@
 {
-    "name": "dts-eve/oauth2-eve",
+    "name": "razesoldier/oauth2-eve",
     "description": "EVE Online Oauth 2.0 Client Provider for The PHP League OAuth2-Client",
     "type": "library",
     "keywords" :[
@@ -12,17 +12,22 @@
         "eve online",
         "eveonline"
     ],
-    "homepage": "https://github.com/dts-eve/oauth2-eve",
+    "version": "1.0.3",
+    "homepage": "https://github.com/razesoldier/oauth2-eve",
     "license": "MIT",
     "authors": [
         {
             "name": "Oizys",
             "email": "oizys@killmails.com",
             "homepage": "https://killmails.com"
+        },
+        {
+            "name": "RazeSoldier",
+            "email": "razesoldier@outlook.com"
         }
     ],
     "support": {
-        "issues": "https://github.com/dts-eve/oauth2-eve/issues"
+        "issues": "https://github.com/razesoldier/oauth2-eve/issues"
     },
     "require": {
         "league/oauth2-client": "^2.0"
